@@ -1,0 +1,468 @@
+/*
+
+  Project name:       Back on my feet
+  Project URL:        http://backonmyfeet.co.uk/
+  
+  Credits
+  ---------------------------------------------
+  Design:             @rafbauer
+  Video:              @emilrydberg
+  Programming:        @niklaspalm
+  
+*/
+html, body {
+  height: 100%;
+  min-height: 100%;
+}
+body {
+  background: #fff;
+  overflow: hidden;
+}
+
+/* LOGO */
+header {
+  position: absolute;
+  top: 126px;
+  left: 88px;
+  width: 120px;
+  height: 119px;
+  background: url(../images/logo.png);
+  text-indent: -5000px;
+  overflow: hidden;
+  z-index: 3;
+}
+
+aside#foot {
+  position: absolute;
+  top: 64px;
+  top: -245px;
+  left: 67px;
+  width: 176px;
+  height: 245px;
+  background: url(../images/logo-shoe-print.png);
+  z-index: 2;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  transition: all 0.2s;
+
+}
+
+/* NAVIGATION */
+nav {
+  position: fixed;
+  top: 0;
+  left: 16px;
+  z-index: 4;
+}
+nav a {
+  text-transform: uppercase;
+  float: left;
+  font-size: 20px;
+  text-align: center;
+  display: block;
+  padding: 17px 0;
+  color: #fff;
+  text-decoration: none;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  transition: all 0.2s;
+}
+nav a:hover, nav a.active { color: #973925; }
+nav a#about {
+  width: 160px;
+  background: url(../images/btn-about.png) no-repeat top left;
+}
+nav a#our-stories {
+  width: 187px;
+  background: url(../images/btn-our-stories.png) no-repeat top left;
+}
+nav a#thank-you {
+  width: 171px;
+  background: url(../images/btn-thank-you.png) no-repeat top left;
+}
+nav a#like {
+  width: 206px;
+  padding: 14px 0 15px 0;
+  background: url(../images/btn-like.png) no-repeat top left;
+}
+
+/* SOCIAL MEDIA ICONS */
+aside#social-media {
+  position: absolute;
+  top: 8px;
+  left: 755px;
+  z-index: 2;
+}
+aside#social-media a {
+  width: 48px;
+  height: 48px;
+  float: left;
+  margin: 0 10px 0 0;
+  text-indent: -5000px;
+  overflow: hidden;
+  display: block;
+  -webkit-transition: all 0.18s;
+  -moz-transition: all 0.18s;
+  -o-transition: all 0.18s;
+  -ms-transition: all 0.18s;
+  transition: all 0.18s;
+}
+aside#social-media a#twitter { background: url(../images/btn-twitter.png); }
+aside#social-media a#facebook { background: url(../images/btn-facebook.png); }
+aside#social-media a:hover { margin: -5px 10px 0 0; }
+
+aside#donation, aside#multiple-donations {
+  width: 370px;
+  background: url(../images/box-small.png);
+  color: #fff;
+  font-size: 13px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: -130px 0 0 -185px;
+  z-index: 998;
+  display: none;
+}
+
+aside#multiple-donations {
+  min-height: 200px;
+}
+
+
+aside#donation p, aside#multiple-donations p { padding: 40px; }
+aside#multiple-donations p { display: none; }
+
+/* SEARCH */
+aside#search {
+  position: fixed;
+  bottom: 0;
+  left: 20px;
+  width: 468px;
+  height: 69px;
+  color: #fff;
+  font-size: 16px;
+  font-style: normal !important;
+  background: url(../images/search-box.png);
+  z-index: 2;
+}
+aside#search label {
+  position: absolute;
+  top: 26px;
+  left: 30px;
+  width: 90px;
+  line-height: 0.9;
+}
+aside#search input[type="search"] {
+  position: absolute;
+  top: 24px;
+  left: 134px;
+  font-size: 13px;
+  color: #009fe3;
+  width: 237px;
+  padding: 10px 10px 6px 10px;
+}
+aside#search input[type="submit"] {
+  position: absolute;
+  top: 24px;
+  left: 400px;
+  font-size: 24px;
+  color: #fff;
+  background: transparent;
+  border: none;
+  overflow: visible;
+  padding: 5px 10px;
+}
+aside#search input[type="submit"]:hover {
+  color: #d9593d;
+}
+
+/* COUNTER AND SPONSORS */
+aside#counter-sponsors {
+  position: fixed;
+  left: 546px;
+  bottom: 0;
+  width: 418px;
+  height: 67px;
+  background: url(../images/counter-sponsors.png);
+  color: #fff;
+  z-index: 2;
+}
+aside#counter-sponsors #steps {
+  font-size: 34px;
+  position: absolute;
+  left: 28px;
+  top: 18px;
+  text-align: right;
+  width: 112px;
+}
+aside#counter-sponsors #steps-label {
+  text-transform: uppercase;
+  width: 60px;
+  font-size: 16px;
+  line-height: 0.9;
+  position: absolute;
+  left: 150px;
+  top: 26px;
+}
+aside#counter-sponsors #links {
+  position: absolute;
+  left: 264px;
+  top: 26px;
+}
+aside#counter-sponsors #links img {
+  margin: 0 10px 0 0;
+}
+a#buy-steps {
+  position: fixed;
+  left: 546px;
+  bottom: 59px;
+  text-indent: -50000px;
+  overflow: hidden;
+  width: 241px;
+  height: 77px;
+  background: url(../images/buy-steps.png) no-repeat left top;
+  z-index: 2;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  transition: all 0.3s;
+}
+a#buy-steps:hover { background: url(../images/buy-steps.png) no-repeat left bottom; }
+
+
+/* TWITTER JOURNAL */
+aside#journal {
+  position: absolute;
+  overflow: hidden;
+  right: 0;
+  top: 0;
+  background: url(../images/journal-bg.png);
+  width: 183px;
+  padding: 17px;
+  z-index: 2;
+  height: 100%;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  transition: all 0.3s;
+
+}
+aside#journal h1 {
+  font-size: 20px;
+  text-transform: uppercase;
+  color: #009fe3;
+  margin: 5px 0;
+}
+aside#journal .close-open {
+  display: block;
+  position: absolute;
+  top: 19px;
+  right: 12px;
+  width: 13px;
+  height: 11px;
+  cursor: pointer;
+  background: url(../images/journal-close.png) no-repeat left top;
+}
+aside#journal.collapsed {
+  height: 22px;
+}
+aside#journal.collapsed .close-open {
+  background: url(../images/journal-close.png) no-repeat left bottom;
+}
+aside#journal p {
+  font-family: verdana, sans-serif;
+  padding: 0 0 6px 0;
+  margin: 0 0 6px 0;
+  border-bottom: 1px dotted #009fe3;
+  color: #009fe3;
+}
+aside#journal a { color: #d9593d; text-decoration: none; }
+aside#journal a:hover { color: #222; text-decoration: none; border-bottom: 1px dotted #666; }
+aside#journal span.author { font-size: 12px; font-weight: bold; display: block; }
+aside#journal span.message { font-size: 11px; display: block; }
+aside#journal span.date { font-size: 9px; display: block; margin: 4px 0 0 0; }
+
+/* MAIN CONTENT */
+#articles, #video {
+  display: none;
+  width: 698px;
+  height: 489px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -244px 0 0 -344px;
+  background: url(../images/content-area.png);
+  overflow: hidden;
+  z-index: 998;
+}
+#articles.negative {
+  background: url(../images/content-area-negative.png);
+}
+#articles .close, #multiple-donations, .close, #donation .close, #video .close {
+  position: absolute;
+  top: 27px;
+  right: 35px;
+  width: 17px;
+  height: 17px;
+  background: url(../images/box-close.png);
+  cursor: pointer;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  -ms-transition: all 0.5s;
+  transition: all 0.5s;
+}
+#multiple-donations .close, #donation .close { top: 15px; right: 15px;}
+#articles .close:hover, #donation .close:hover, #multiple-donations .close:hover {
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+#articles article {
+  position: absolute;
+  top: 75px;
+  left: 68px;
+  width: 572px;
+  color: #fff;
+  display: none;
+}
+#articles.negative article {
+  color: #009fe3;
+}
+#articles article h3 {
+  font-size: 22px;
+  font-weight: normal;
+  line-height: 1.2;
+  letter-spacing: 0.3;
+  text-transform: uppercase;
+  text-align: center;
+  margin-top: 20px;
+}
+#articles article a {
+  color: #fff;
+  text-decoration: none;
+  border-bottom: 1px dotted #fff;
+}
+#articles.negative article a {
+  color: #009fe3;
+  text-decoration: none;
+  border-bottom: 1px dotted #009fe3;
+}
+
+#articles article p {
+  font-size: 18px;
+  line-height: 1.2;
+  letter-spacing: 0.3;
+  text-transform: uppercase;
+  margin-top: 30px;
+}
+
+#articles ul#controls, #multiple-donations ul#controls {
+  position: absolute;
+  right: 35px;
+  bottom: 28px;
+  list-style: none;
+}
+#multiple-donations ul#controls {
+  bottom: -70px;
+  left: 50%;
+  margin: 0 0 0 -105px;
+  display: none;
+}
+#articles ul#controls li, #multiple-donations ul#controls li {
+  text-indent: -5000px;
+  overflow: hidden;
+  float: left;
+  margin: 0 0 0 20px;
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+  filter: alpha(opacity=70);
+  opacity: 0.7;
+  cursor: pointer;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  -ms-transition: all 0.5s;
+  transition: all 0.5s;
+  width: 34px;
+  height: 39px;
+}
+#articles ul#controls li.next, #multiple-donations ul#controls li.next { background: url(../images/box-next.png); }
+#articles ul#controls li.prev, #multiple-donations ul#controls li.prev { background: url(../images/box-prev.png); }
+#articles.negative ul#controls li.next { background: url(../images/box-next-negative.png); }
+#articles.negative ul#controls li.prev { background: url(../images/box-prev-negative.png); }
+#articles ul#controls li:hover, ##multiple-donations ul#controls li:hover {
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  filter: alpha(opacity=100);
+  opacity: 1;
+}
+
+#articles_overlay {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #000;
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+  filter: alpha(opacity=70);
+  opacity: 0.7;
+  z-index: 997;
+  display: none;
+}
+
+/* GOOGLE MAPS RELATED */
+#ze_map {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+/* DONATION FRAME */
+#iframe {
+  display: none;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  -webkit-box-shadow: 0 0 20px #000;
+  -moz-box-shadow: 0 0 20px #000;
+  box-shadow: 0 0 20px #000;
+  z-index: 999;
+  background: #fff;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  -ms-transition: all 0.5s;
+  transition: all 0.5s;
+
+}
+#iframe .close {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  z-index: 2;
+  width: 52px;
+  height: 45px;
+  display: block;
+  background: url(../images/map-close.png) no-repeat left top;
+}
+#iframe .close:hover {
+  background: url(../images/map-close.png) no-repeat left bottom;
+}
+#iframe iframe {
+  border: none;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 1;
+}

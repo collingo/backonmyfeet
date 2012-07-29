@@ -1,0 +1,149 @@
+/*
+
+  Project name:       Back on my feet
+  Project URL:        http://mobile.backonmyfeet.co.uk/
+  
+  Credits
+  ---------------------------------------------
+  Programming:        @niklaspalm
+  
+*/
+html, body {
+  height: 100%;
+  min-height: 100%;
+}
+body {
+  background: #d9593d;
+}
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  z-index: 1;
+  -webkit-box-shadow: 0 0 10px #333;
+  -moz-box-shadow: 0 0 10px #333;
+  box-shadow: 0 0 10px #333;
+  background: #fff url(../images/mobile/logo.png) no-repeat 10px center;
+}
+header nav {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 13px;
+  text-transform: uppercase;
+  font-style: normal;
+}
+header nav a {
+  display: block;
+  padding: 17px 15px 15px 15px;
+  border-left: 1px solid #c0e7f8;
+  float: left;
+  text-decoration: none;
+  color: #2fb1e8;
+}
+header nav a.active {
+  text-decoration: underline;
+  background: #eaf7fd;
+}
+aside#donate {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: 1;
+  -webkit-box-shadow: 0 0 10px #333;
+  -moz-box-shadow: 0 0 10px #333;
+  box-shadow: 0 0 10px #333;
+  background: #fff;
+}
+aside#donate a {
+  display: block;
+  padding: 15px;
+  text-decoration: none;
+  color: #2fb1e8;
+  text-transform: uppercase;
+  text-align: center;
+}
+aside#preloading {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: #fff url(../images/logo.png) no-repeat center center;
+  z-index: 2;
+}
+aside#preloading span {
+  font-size: 11px;
+  color: #009fe3;
+  text-transform: uppercase;
+  position: absolute;
+  top: 50%;
+  margin: 75px 0 0 0;
+  width: 100%;
+  text-align: center;
+}
+#about, #donations {
+  padding: 50px 0 50px 0;
+}
+#about ul {
+  padding: 15px;
+  text-align: center;
+  list-style: none;
+}
+#about li {
+  display: inline-block;
+  margin: 0 25px;
+}
+#about {
+  display: none;
+}
+article {
+  background: #d9593d;
+  color: #fff;
+  padding: 15px;
+  border-bottom: 1px solid #c35037;
+  border-top: 1px solid #dd6a51;
+  -webkit-transition: all 0.25s;
+  -moz-transition: all 0.25s;
+  -o-transition: all 0.25s;
+  -ms-transition: all 0.25s;
+  transition: all 0.25s;
+}
+article.active {
+  background: #c64529;
+  -webkit-box-shadow: 0 0 12px #9d3720 inset;
+  -moz-box-shadow: 0 0 12px #9d3720 inset;
+  box-shadow: 0 0 12px #9d3720 inset;
+}
+article p {
+  font-size: 14px;
+  text-transform: uppercase;
+}
+article p.message {
+  display: none;
+  padding: 0 0 5px 0;
+}
+article p.from {
+  font-size: 11px;
+}
+article p.amount {
+  font-size: 10px;
+}
+#about article {
+  display: none;
+  text-align: left;
+}
+#about article:first-child {
+  display: block;
+}
+
+article a {
+  color: #fff;
+  text-decoration: none;
+}
+img {
+  border: none;
+}
