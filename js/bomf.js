@@ -395,7 +395,7 @@ var map = "",
     myOptions = {
       // center: new google.maps.LatLng(51.261311,-0),
       center: new google.maps.LatLng(51.471902,-0.516925),
-      zoom: 11,
+      zoom: 10,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
       mapTypeControl: false,
       panControl: false,
@@ -496,7 +496,7 @@ function initialize() {
   henleyPolyLine = new google.maps.Polyline({path:henleyLL, strokeColor: "#d9583c", strokeOpacity: 1.0, strokeWeight: 5, geodesic: true});
   henleyPolyLine.setMap(map);
 
-  console.log(henleyPolyLine.inKm()); 
+  // console.log(henleyPolyLine.inKm()); 
 
   var start_image = new google.maps.MarkerImage("/images/Putney.png", null, null, new google.maps.Point(0, 40) ),
       start_position = new google.maps.LatLng(51.45657410651974, -0.3055572509765625),
@@ -571,7 +571,6 @@ function initialize() {
 
 function bindInfoWindow(marker, map, infowindow, html) { 
 	google.maps.event.addListener(marker, 'mouseover', function() { 
-		console.log('here');
 		if(lastOpenInfoWin) lastOpenInfoWin.close();
 	    lastOpenInfoWin = infowindow;
 	    infowindow.setContent(html); 
@@ -717,15 +716,21 @@ $().ready(function(){
 
   });
 
+  var totalSteps = 0;
+  function addToSteps(steps) {
+    totalSteps += steps;
+    $("#steps").text(totalSteps);
+  }
+
   // total
   $.getJSON('https://api.justgiving.com/fbfeb0e5/v1/fundraising/pages/backonmyfeet?format=json&callback=?', {},  function (data) {
-      console.log("Total = ", parseInt(data.totalRaisedOffline, 10) + parseInt(data.totalRaisedOnline, 10));
+    addToSteps(parseInt(data.totalRaisedOffline, 10) + parseInt(data.totalRaisedOnline, 10));
   });
 
   var hash = window.location.hash;
   
-  $.getJSON('http://api.jo.je/virginmoneygiving/jsonp.php?d=177727&nocache=1&callback=?', {},  function (data) {    
-    $("#steps").html(data.money_total.replace(".00", ""));
+  $.getJSON('http://api.jo.je/virginmoneygiving/jsonp.php?d=177727&nocache=1&callback=?', {},  function (data) {
+    addToSteps(parseInt(data.money_total, 10));
     var donations = "";
     data.donations = data.donations.reverse();    
     // $.each(data.donations, function(index, value) {
