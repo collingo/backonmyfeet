@@ -623,12 +623,9 @@ $().ready(function(){
 
   // donations
   $.getJSON('https://api.justgiving.com/fbfeb0e5/v1/fundraising/pages/backonmyfeet/donations?format=json&callback=?', {},  function (data) {
-      console.log("Donations count = ", data.donations.length);
-      console.log("Data", data);
       var donations = data.donations;
-      console.log(donations);
 
-
+    // plot donation markers
     $.each(donations, function(index, value) {
       if(index === 0) {
         var extra = 0;
@@ -644,6 +641,80 @@ $().ready(function(){
         add_marker(henleyCoords[extra].lat, henleyCoords[extra].long, "<p style=\"color: #d9593d; font-size: 13px; text-transform: uppercase\">"+value.donorDisplayName+"<br>Donated "+parseInt(value.amount, 10)+" steps</p>"+share);
       }
     });
+
+    // bind search handler
+    $("#search-button").click(function(){
+      var t = $("#search-button");
+      setTimeout(function(){
+        var si = $("#search-input").val().toLowerCase();
+        if(si == "") {
+          t.animate({top:14}, 50).delay(50).animate({top:34}, 50).animate({top:14}, 50).delay(50).animate({top:34}, 50).animate({top:14}, 50).delay(50).animate({top:34}, 50).delay(50).animate({top:24}, 50);
+          return false;
+        }
+        var matches = 0,
+            donation_texts = [];
+        $("#multiple-donations div").html("");
+        $("#multiple-donations #controls").hide();
+        $.each(donations, function(index, value) {
+          var sp = value.donorDisplayName.toLowerCase();
+          if(sp.match(si)) {
+            matches+=1;
+            var tt = "onclick=\"window.open('http://twitter.com/home?status=I donated money to Back On My Feet, you should do the same! See my message for the guys: www.backonmyfeet.co.uk/d.php?id="+index+"','Share','left=20,top=20,width=600,height=400,toolbar=0,resizable=0'); return false;\"";
+            var ft = "onclick=\"window.open('http://www.facebook.com/sharer.php?u=http://www.backonmyfeet.co.uk/d.php?id="+index+"','Share','left=20,top=20,width=600,height=400,toolbar=0,resizable=0'); return false;\"";
+            var share = "<span style=\"display: block; text-align:right; padding: 0 40px; margin: 5px 0 0 0;\"><a "+tt+" href=\"#\"><img src=\"images/btn-twitter-small.png\"></a>&nbsp;&nbsp;<a "+ft+" href=\"#\"><img src=\"images/btn-facebook-small.png\"></a></span>";
+            if(value.message != "") {
+              var pp = "<p style=\"font-size: 13px; text-transform: uppercase\">"+value.message+"<br><br>"+value.donorDisplayName+"<br>Donated "+value.amount+" steps"+share+"</p>";
+            } else {
+              var pp = "<p style=\"font-size: 13px; text-transform: uppercase\">"+value.donorDisplayName+"<br>Donated "+value.amount.toFixed(2)+" steps"+share+"</p>";
+            }
+            $("#multiple-donations div").append(pp);
+          }
+        });
+        if(matches > 0) {
+          $("#multiple-donations .close").click(function(){
+            $("#articles_overlay").fadeOut(250);
+            $("#multiple-donations").delay(250).fadeOut(250);
+          });
+          $("#multiple-donations p").eq(0).show();
+          $("#articles_overlay").fadeIn(250);
+          $("#multiple-donations").delay(250).fadeIn(250);
+          if(matches > 1) {
+            var controls = $("#multiple-donations #controls"),
+                active_donation = 0;
+            
+            controls.show();
+            controls.click(function(){
+              if($(this).find('li').hasClass('next')) {
+                var hide = $("#multiple-donations p").eq(active_donation);
+                if(active_donation == matches-1) {
+                  var show = $("#multiple-donations p").eq(0);
+                  active_donation = 0;
+                } else {
+                  var show = $("#multiple-donations p").eq(active_donation+1);
+                  active_donation+=1;
+                }
+                hide.fadeOut(250);
+                show.delay(500).fadeIn(250);
+              } else {
+                var hide = $("#multiple-donations p").eq(active_donation);
+                if(active_donation == 0) {
+                  var show = $("#multiple-donations p").eq(matches-1);
+                  active_donation = matches-1;
+                } else {
+                  var show = $("#multiple-donations p").eq(active_donation-1);
+                  active_donation-=1;
+                }
+                hide.fadeOut(250);
+                show.delay(500).fadeIn(250);
+              }
+            })
+          }
+        } else {
+          t.animate({top:14}, 50).delay(50).animate({top:34}, 50).animate({top:14}, 50).delay(50).animate({top:34}, 50).animate({top:14}, 50).delay(50).animate({top:34}, 50).delay(50).animate({top:24}, 50);
+        }
+      }, 100);
+    });
+
   });
 
   // total
@@ -694,77 +765,77 @@ $().ready(function(){
     } else {
       change_ze_menu($("nav a").eq(0));
     }
-    $("#search-button").click(function(){
-      var t = $("#search-button");
-      setTimeout(function(){
-        var si = $("#search-input").val().toLowerCase();
-        if(si == "") {
-          t.animate({top:14}, 50).delay(50).animate({top:34}, 50).animate({top:14}, 50).delay(50).animate({top:34}, 50).animate({top:14}, 50).delay(50).animate({top:34}, 50).delay(50).animate({top:24}, 50);
-          return false;
-        }
-        var matches = 0,
-            donation_texts = [];
-        $("#multiple-donations div").html("");
-        $("#multiple-donations #controls").hide();
-        $.each(data.donations, function(index, value) {
-          var sp = value.person.toLowerCase();
-          if(sp.match(si)) {
-            matches+=1;
-            var tt = "onclick=\"window.open('http://twitter.com/home?status=I donated money to Back On My Feet, you should do the same! See my message for the guys: www.backonmyfeet.co.uk/d.php?id="+index+"','Share','left=20,top=20,width=600,height=400,toolbar=0,resizable=0'); return false;\"";
-            var ft = "onclick=\"window.open('http://www.facebook.com/sharer.php?u=http://www.backonmyfeet.co.uk/d.php?id="+index+"','Share','left=20,top=20,width=600,height=400,toolbar=0,resizable=0'); return false;\"";
-            var share = "<span style=\"display: block; text-align:right; padding: 0 40px; margin: 5px 0 0 0;\"><a "+tt+" href=\"#\"><img src=\"images/btn-twitter-small.png\"></a>&nbsp;&nbsp;<a "+ft+" href=\"#\"><img src=\"images/btn-facebook-small.png\"></a></span>";
-            if(value.message != "") {
-              var pp = "<p style=\"font-size: 13px; text-transform: uppercase\">"+value.message+"<br><br>"+value.person+"<br>Donated "+value.amount+" steps"+share+"</p>";
-            } else {
-              var pp = "<p style=\"font-size: 13px; text-transform: uppercase\">"+value.person+"<br>Donated "+value.amount+" steps"+share+"</p>";
-            }
-            $("#multiple-donations div").append(pp);
-          }
-        });
-        if(matches > 0) {
-          $("#multiple-donations .close").click(function(){
-            $("#articles_overlay").fadeOut(250);
-            $("#multiple-donations").delay(250).fadeOut(250);
-          });
-          $("#multiple-donations p").eq(0).show();
-          $("#articles_overlay").fadeIn(250);
-          $("#multiple-donations").delay(250).fadeIn(250);
-          if(matches > 1) {
-            var controls = $("#multiple-donations #controls"),
-                active_donation = 0;
+    // $("#search-button").click(function(){
+    //   var t = $("#search-button");
+    //   setTimeout(function(){
+    //     var si = $("#search-input").val().toLowerCase();
+    //     if(si == "") {
+    //       t.animate({top:14}, 50).delay(50).animate({top:34}, 50).animate({top:14}, 50).delay(50).animate({top:34}, 50).animate({top:14}, 50).delay(50).animate({top:34}, 50).delay(50).animate({top:24}, 50);
+    //       return false;
+    //     }
+    //     var matches = 0,
+    //         donation_texts = [];
+    //     $("#multiple-donations div").html("");
+    //     $("#multiple-donations #controls").hide();
+    //     $.each(data.donations, function(index, value) {
+    //       var sp = value.person.toLowerCase();
+    //       if(sp.match(si)) {
+    //         matches+=1;
+    //         var tt = "onclick=\"window.open('http://twitter.com/home?status=I donated money to Back On My Feet, you should do the same! See my message for the guys: www.backonmyfeet.co.uk/d.php?id="+index+"','Share','left=20,top=20,width=600,height=400,toolbar=0,resizable=0'); return false;\"";
+    //         var ft = "onclick=\"window.open('http://www.facebook.com/sharer.php?u=http://www.backonmyfeet.co.uk/d.php?id="+index+"','Share','left=20,top=20,width=600,height=400,toolbar=0,resizable=0'); return false;\"";
+    //         var share = "<span style=\"display: block; text-align:right; padding: 0 40px; margin: 5px 0 0 0;\"><a "+tt+" href=\"#\"><img src=\"images/btn-twitter-small.png\"></a>&nbsp;&nbsp;<a "+ft+" href=\"#\"><img src=\"images/btn-facebook-small.png\"></a></span>";
+    //         if(value.message != "") {
+    //           var pp = "<p style=\"font-size: 13px; text-transform: uppercase\">"+value.message+"<br><br>"+value.person+"<br>Donated "+value.amount+" steps"+share+"</p>";
+    //         } else {
+    //           var pp = "<p style=\"font-size: 13px; text-transform: uppercase\">"+value.person+"<br>Donated "+value.amount+" steps"+share+"</p>";
+    //         }
+    //         $("#multiple-donations div").append(pp);
+    //       }
+    //     });
+    //     if(matches > 0) {
+    //       $("#multiple-donations .close").click(function(){
+    //         $("#articles_overlay").fadeOut(250);
+    //         $("#multiple-donations").delay(250).fadeOut(250);
+    //       });
+    //       $("#multiple-donations p").eq(0).show();
+    //       $("#articles_overlay").fadeIn(250);
+    //       $("#multiple-donations").delay(250).fadeIn(250);
+    //       if(matches > 1) {
+    //         var controls = $("#multiple-donations #controls"),
+    //             active_donation = 0;
             
-            controls.show();
-            controls.click(function(){
-              if($(this).find('li').hasClass('next')) {
-                var hide = $("#multiple-donations p").eq(active_donation);
-                if(active_donation == matches-1) {
-                  var show = $("#multiple-donations p").eq(0);
-                  active_donation = 0;
-                } else {
-                  var show = $("#multiple-donations p").eq(active_donation+1);
-                  active_donation+=1;
-                }
-                hide.fadeOut(250);
-                show.delay(500).fadeIn(250);
-              } else {
-                var hide = $("#multiple-donations p").eq(active_donation);
-                if(active_donation == 0) {
-                  var show = $("#multiple-donations p").eq(matches-1);
-                  active_donation = matches-1;
-                } else {
-                  var show = $("#multiple-donations p").eq(active_donation-1);
-                  active_donation-=1;
-                }
-                hide.fadeOut(250);
-                show.delay(500).fadeIn(250);
-              }
-            })
-          }
-        } else {
-          t.animate({top:14}, 50).delay(50).animate({top:34}, 50).animate({top:14}, 50).delay(50).animate({top:34}, 50).animate({top:14}, 50).delay(50).animate({top:34}, 50).delay(50).animate({top:24}, 50);
-        }
-      }, 100);
-    });
+    //         controls.show();
+    //         controls.click(function(){
+    //           if($(this).find('li').hasClass('next')) {
+    //             var hide = $("#multiple-donations p").eq(active_donation);
+    //             if(active_donation == matches-1) {
+    //               var show = $("#multiple-donations p").eq(0);
+    //               active_donation = 0;
+    //             } else {
+    //               var show = $("#multiple-donations p").eq(active_donation+1);
+    //               active_donation+=1;
+    //             }
+    //             hide.fadeOut(250);
+    //             show.delay(500).fadeIn(250);
+    //           } else {
+    //             var hide = $("#multiple-donations p").eq(active_donation);
+    //             if(active_donation == 0) {
+    //               var show = $("#multiple-donations p").eq(matches-1);
+    //               active_donation = matches-1;
+    //             } else {
+    //               var show = $("#multiple-donations p").eq(active_donation-1);
+    //               active_donation-=1;
+    //             }
+    //             hide.fadeOut(250);
+    //             show.delay(500).fadeIn(250);
+    //           }
+    //         })
+    //       }
+    //     } else {
+    //       t.animate({top:14}, 50).delay(50).animate({top:34}, 50).animate({top:14}, 50).delay(50).animate({top:34}, 50).animate({top:14}, 50).delay(50).animate({top:34}, 50).delay(50).animate({top:24}, 50);
+    //     }
+    //   }, 100);
+    // });
   });
   
   //change_ze_menu($("nav a").eq(0));
