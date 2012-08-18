@@ -622,7 +622,7 @@ $().ready(function(){
 
   // donations
   $.getJSON('https://api.justgiving.com/fbfeb0e5/v1/fundraising/pages/backonmyfeet/donations?format=json&callback=?', {},  function (data) {
-      var donations = data.donations;
+      var donations = data.donations.reverse();
 
     // plot donation markers
     $.each(donations, function(index, value) {
