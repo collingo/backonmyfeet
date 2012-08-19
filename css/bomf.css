@@ -207,6 +207,7 @@ aside#counter-sponsors #steps-label {
   position: absolute;
   left: 150px;
   top: 26px;
+  display: none;
 }
 aside#counter-sponsors #links {
   position: absolute;
