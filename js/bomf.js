@@ -623,6 +623,7 @@ $().ready(function(){
   // donations
   $.getJSON('https://api.justgiving.com/fbfeb0e5/v1/fundraising/pages/backonmyfeet/donations?format=json&callback=?', {},  function (data) {
       var donations = data.donations.reverse();
+    console.log("JustGiving:", donations);
 
     // plot donation markers
     $.each(donations, function(index, value) {
@@ -724,7 +725,7 @@ $().ready(function(){
 
   // total
   $.getJSON('https://api.justgiving.com/fbfeb0e5/v1/fundraising/pages/backonmyfeet?format=json&callback=?', {},  function (data) {
-    addToSteps(parseInt(data.totalRaisedOffline, 10) + parseInt(data.totalRaisedOnline, 10));
+    addToSteps(parseInt(data.grandTotalRaisedExcludingGiftAid, 10));
   });
 
   var hash = window.location.hash;
@@ -732,7 +733,8 @@ $().ready(function(){
   $.getJSON('http://api.jo.je/virginmoneygiving/jsonp.php?d=177727&nocache=1&callback=?', {},  function (data) {
     addToSteps(parseInt(data.money_total, 10));
     var donations = "";
-    data.donations = data.donations.reverse();    
+    data.donations = data.donations.reverse();
+    console.log("Virgin:", data.money_total, data.donations);
     // $.each(data.donations, function(index, value) {
     //   if(index == 0) {
     //     var extra = 0;
