@@ -86,6 +86,7 @@ nav a#thank-you {
 }
 nav a#like {
   width: 206px;
+  height:28px;
   padding: 14px 0 15px 0;
   background: url(../images/btn-like.png) no-repeat top left;
 }
