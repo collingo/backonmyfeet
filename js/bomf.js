@@ -624,17 +624,11 @@ function stristr (haystack, needle, bool) {
 
 // Virgin Money Total
 function VirginTotal() {
-
-	var hash = window.location.hash;
-	
 	return $.getJSON('http://api.jo.je/virginmoneygiving/jsonp.php?d=177727&nocache=1&callback=?');
 }
 
 // Virgin Money Donations
 function VirginDonations() {
-
-	var hash = window.location.hash;
-	
 	return $.getJSON('http://api.jo.je/virginmoneygiving/jsonp.php?d=177727&nocache=1&callback=?');
 }
 
@@ -652,6 +646,11 @@ function JustGivingTotal() {
 
 $(function() {
 
+	var hash = window.location.hash;
+	
+	// show overlay
+	change_ze_menu($("nav a").eq(0));
+
 	// total steps counter
 	$.when( VirginTotal(), JustGivingTotal() ).then(function( virginTotal, justGivingTotal ){
 
@@ -666,8 +665,8 @@ $(function() {
 	$.when( VirginDonations(), JustGivingDonations() ).then(function( virgin, justGiving){
 
 		var allDonations = []
-				virginDonations = virgin[0].donations.reverse(),
-				justGivingDonations = justGiving[0].donations.reverse();
+			virginDonations = virgin[0].donations.reverse(),
+			justGivingDonations = justGiving[0].donations.reverse();
 
 		// add virgin donations to allDonations
 		$.each(virginDonations, function(index, donation) {
@@ -686,6 +685,28 @@ $(function() {
 				message: donation.message
 			});
 		});
+
+		// setup overlay
+		if(hash.match('donation:')) {
+			hash = hash.replace('#donation:', '');
+			if(allDonations[hash].message != "") {
+				var p = $("<p />").html(allDonations[hash].message+"<br><br>"+allDonations[hash].name+"<br>"+"Donated "+allDonations[hash].amount.replace(".00", "")+" steps");
+			} else {
+				var p = $("<p />").html(allDonations[hash].name+"<br>"+"Donated "+allDonations[hash].amount.replace(".00", "")+" steps");
+			}
+			$("#articles_overlay").fadeIn(250);
+			$("#donation").append(p).delay(250).fadeIn(250);
+		} else if(hash.match('video')) {
+			$("#articles_overlay").fadeIn(250);
+			$("#video").delay(251).fadeIn(250);
+			$("#video .close").click(function(){
+			$("#video").fadeOut(250);
+				setTimeout(function(){
+					$("#video").remove();
+				}, 250);
+				$("#articles_overlay").delay(250).fadeOut(250);
+			});
+		}
 
 		// plot donation markers
 		$.each(allDonations, function(index, value) {
@@ -778,8 +799,6 @@ $(function() {
 
 	});
 
-	//change_ze_menu($("nav a").eq(0));
-	
 	$("nav a").click(function(){
 		change_ze_menu($(this));
 		return false;
